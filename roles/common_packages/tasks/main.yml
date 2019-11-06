@@ -1,31 +1,32 @@
 ---
 
 - name: Install a list of packages
-    apt:
-      name: "{{ packages }}"
-      state: present
-      update_cache: yes
-    vars:
-      packages:
-      - unzip
-      - zsh
-      - wget
-      - curl
-      - apt-transport-https
-      - ca-certificates
-      - gnupg-agent
-      - software-properties-common
-      - unrar
-      - git
-      - libasound2
-      - libgtk2.0-0
-      - libxss1
-      - ubuntu-restricted-extras
-      - python3-pip
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - unzip
+    - zsh
+    - wget
+    - curl
+    - apt-transport-https
+    - ca-certificates
+    - gnupg-agent
+    - software-properties-common
+    - unrar
+    - libasound2
+    - libgtk2.0-0
+    - libxss1
+    - ubuntu-restricted-extras
+    - python3-pip
+    - vim
+    - neofetch
 
 - name: Create a Development if it does not exist
   file:
-    path: ~/Development
+    path: /home/kevinchou/Development
     state: directory
     mode: '0755'
     owner: kevinchou
@@ -33,7 +34,7 @@
 
 - name: Create Golang Development if it does not exist
   file:
-    path: ~/Development/GOLANG
+    path: /home/kevinchou/Development/GOLANG
     state: directory
     mode: '0755'
     owner: kevinchou

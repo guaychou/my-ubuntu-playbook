@@ -1,12 +1,22 @@
 ---
 
+- name: Download zsh installation script
+  get_url:
+    url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /home/kevinchou/install-zsh.sh
+    mode: '0755'
+
 - name: Install oh-my-zsh
-  command: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  shell: /home/kevinchou/install-zsh.sh
+  args:
+    executable: /usr/bin/bash
+  become_user: kevinchou
 
 - name: Add source to zsh_profile
   lineinfile:
     path: ~/.zshrc
     line: source ~/.zsh_profile
+  become_user: kevinchou
 
 - name: export golang environtment variable
   blockinfile:
@@ -16,3 +26,5 @@
       export GOPATH=$HOME/Development/GOLANG
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
       export PATH="$PATH:/opt/bin"
+  become_user: kevinchou
+

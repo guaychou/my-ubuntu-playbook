@@ -4,14 +4,18 @@
   unarchive:
     src: https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip 
     dest: /opt/bin
+    creates: /opt/bin/terraform
     remote_src: yes
+  become_user: kevinchou
 
 
 - name: Download Packer
   unarchive:
     src: https://releases.hashicorp.com/packer/1.4.5/packer_1.4.5_linux_amd64.zip
     dest: /opt/bin
+    creates: /opt/bin/packer
     remote_src: yes
+  become_user: kevinchou
 
 - name: install key (apt)
   become: yes
@@ -38,9 +42,9 @@
     src: https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
     dest: /opt/
     remote_src: yes
+    creates: "/opt/go/"
 
-- # Install (Bottle) for Python 3.3 specifically,using the 'pip3.3' executable.
 - name: Install aws-cli
   pip:
-    name: aws-cli
+    name: awscli
     executable: pip3
