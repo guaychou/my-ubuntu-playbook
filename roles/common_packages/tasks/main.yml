@@ -1,0 +1,48 @@
+---
+
+- name: Install a list of packages
+    apt:
+      name: "{{ packages }}"
+      state: present
+      update_cache: yes
+    vars:
+      packages:
+      - unzip
+      - zsh
+      - wget
+      - curl
+      - apt-transport-https
+      - ca-certificates
+      - gnupg-agent
+      - software-properties-common
+      - unrar
+      - git
+      - libasound2
+      - libgtk2.0-0
+      - libxss1
+      - ubuntu-restricted-extras
+      - python3-pip
+
+- name: Create a Development if it does not exist
+  file:
+    path: ~/Development
+    state: directory
+    mode: '0755'
+    owner: kevinchou
+    group: kevinchou
+
+- name: Create Golang Development if it does not exist
+  file:
+    path: ~/Development/GOLANG
+    state: directory
+    mode: '0755'
+    owner: kevinchou
+    group: kevinchou
+
+- name: Create binary folder in opt folder
+  file: 
+    path: /opt/bin
+    state: directory
+    mode: '0755'
+    owner: kevinchou
+    group: kevinchou

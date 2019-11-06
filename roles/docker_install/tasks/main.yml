@@ -1,0 +1,28 @@
+---
+
+- name: Add an gpg signing Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable
+    state: present
+
+- name: Install Docker
+  apt:
+    name: "{{ packages_docker }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages_docker:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    
+- name: Add the user appending the group docker to the user's groups
+  user:
+    name: "{{ username }}"
+    groups: docker
+    append: yes

@@ -1,0 +1,11 @@
+---
+
+- name: Main task for my Ubuntu playbook
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  roles:
+    - common_packages
+    - setup_zsh
+    - development
+    - docker_install
